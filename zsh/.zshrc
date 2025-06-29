@@ -113,6 +113,8 @@ source $ZSH/oh-my-zsh.sh
 #
 #
 # custom
+export PATH=${HOME}/.npm-global/bin:$PATH
+
 alias ll='ls -alvh '
 alias aptp='sudo apt -o Acquire::http::proxy="http://172.21.240.1:12334" -o Acquire::https::proxy="http://172.21.240.1:12334" '
 alias c='clear'

@@ -135,9 +135,18 @@ else
   log_success "zsh-syntax-highlighting 插件下载完成。"
 fi
 
+# 6. 配置 NPM 全局环境
+log_info "第六步：配置 NPM 全局安装路径..."
+NPM_GLOBAL_DIR="$HOME/.npm-global"
+if [ -d "$NPM_GLOBAL_DIR" ]; then
+    log_warn "NPM 全局目录 (~/.npm-global) 已存在，跳过创建。"
+else
+    mkdir -p "$NPM_GLOBAL_DIR"
+    log_success "已创建 NPM 全局目录: $NPM_GLOBAL_DIR"
+fi
 
 # 4. 【心脏移植手术】安装 mise 多版本管理器
-log_info "第六步：安装高性能版本管理器 mise..."
+log_info "第七步：安装高性能版本管理器 mise..."
 if command_exists mise; then
   log_warn "mise 已安装，跳过。"
 else
@@ -151,7 +160,7 @@ fi
 
 # --- 最终配置 (Final Configuration) ---
 
-log_info "第七步：链接配置文件..."
+log_info "第八步：链接配置文件..."
 # 获取脚本所在的目录，从而定位到整个 dotfiles 项目的根目录
 DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -166,6 +175,11 @@ log_success "已链接 .p10k.zsh"
 # 链接 .gitconfig
 ln -sf "${DOTFILES_DIR}/git/.gitconfig" "$HOME/.gitconfig"
 log_success "已链接 .gitconfig"
+
+# 链接 .npmrc
+# 注意：npm 的配置文件在家目录，而不是在 .config 目录
+ln -sf "${DOTFILES_DIR}/npm/.npmrc" "$HOME/.npmrc"
+log_success "已链接 .npmrc"
 
 # 【升级改造】链接 mise 的全局配置文件
 # 我们不再使用 .tool-versions，而是 mise 更强大的 .mise.toml
