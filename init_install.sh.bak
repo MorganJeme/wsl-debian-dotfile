@@ -1,0 +1,37 @@
+#!/bin/bash
+#
+# 该项目会被clone到以下位置：
+# cd /home/morgan/work_local/git_self
+# git clone https://github.com/MorganJeme/wsl-debian-dotfile.git
+# cd wsl-debian-dotfile
+# 所以，该脚本位置为: /home/morgan/work_local/git_self/wsl-debian-dotfile/init_install.sh
+# 
+# 首先，禁止使用root执行开发环境初始化，执行该脚本需要sudo权限，操作用户为非root的普通用户，安装路径为用户的home目录
+# 询问用户输入sudo密码后，开始执行前需要用户输入代理地址，代理地址可能会变
+# apt/curl/git等所有网络操作都需要使用代理
+#
+#
+# 升级wsl系统包
+sudo apt -o Acquire::http::proxy="http://172.21.240.1:12334" -o Acquire::https::proxy="http://172.21.240.1:12334" update
+sudo apt -o Acquire::http::proxy="http://172.21.240.1:12334" -o Acquire::https::proxy="http://172.21.240.1:12334" upgrade
+
+# 以下的每一步初始化安装前，都需要检查一下是否做了，做了就跳过，因为有可能中间突然终止了，然后又重新执行了
+#
+# 安装环境包
+sudo apt -o Acquire::http::proxy="http://172.21.240.1:12334" -o Acquire::https::proxy="http://172.21.240.1:12334" install -y git curl zsh vim
+
+# .bzshrc/.zshrc 需要加上以下alias配置
+# # custom
+# alias ll='ls -alvh '
+# alias apt='sudo apt -o Acquire::http::proxy="http://172.21.240.1:12334" -o Acquire::https::proxy="http://172.21.240.1:12334" '
+# alias c='clear'
+# alias proxy='http_proxy=http://172.21.240.1:12334 https_proxy=http://172.21.240.1:12334 HTTP_PROXY=http://172.21.240.1:12334 HTTPS_PROXY=http://172.21.240.1:12334 '
+# alias git='proxy git '
+#
+# 安装omz
+#
+# 安装主题：Powerlevel10k
+#
+# 安装插件：zsh-autosuggestions/zsh-syntax-highlighting
+#
+# 安装asdf
