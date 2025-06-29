@@ -114,10 +114,12 @@ source $ZSH/oh-my-zsh.sh
 #
 # custom
 alias ll='ls -alvh '
-alias apt='sudo apt -o Acquire::http::proxy="http://172.21.240.1:12334" -o Acquire::https::proxy="http://172.21.240.1:12334" '
+alias aptp='sudo apt -o Acquire::http::proxy="http://172.21.240.1:12334" -o Acquire::https::proxy="http://172.21.240.1:12334" '
 alias c='clear'
 alias proxy='http_proxy=http://172.21.240.1:12334 https_proxy=http://172.21.240.1:12334 HTTP_PROXY=http://172.21.240.1:12334 HTTPS_PROXY=http://172.21.240.1:12334 '
-alias git='proxy git '
+alias gitp='proxy git '
+alias curlp='curl -x http://172.21.240.1:12334 '
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+eval "$(/home/morgan/.local/bin/mise activate zsh)"
