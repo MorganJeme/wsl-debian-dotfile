@@ -176,6 +176,10 @@ log_success "已链接 .p10k.zsh"
 ln -sf "${DOTFILES_DIR}/git/.gitconfig" "$HOME/.gitconfig"
 log_success "已链接 .gitconfig"
 
+# 链接 update_all.sh
+ln -sf "${DOTFILES_DIR}/update_all.sh" "$HOME/update_all.sh"
+log_success "已链接 update.sh"
+
 # 链接 .npmrc
 # 注意：npm 的配置文件在家目录，而不是在 .config 目录
 ln -sf "${DOTFILES_DIR}/npm/.npmrc" "$HOME/.npmrc"
